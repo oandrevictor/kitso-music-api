@@ -15,5 +15,20 @@
   "bugs": {
     "url": "https://github.com/oandrevictor/kitso-music-api/issues"
   },
-  "homepage": "https://github.com/oandrevictor/kitso-music-api#readme"
+  "homepage": "https://github.com/oandrevictor/kitso-music-api#readme",
+  "dependencies": {
+    "connect-mongo": "^2.0.1",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.2.13",
+    "p": "^0.2.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "swagger-express": "^1.0.5",
+    "swagger-ui-express": "^4.0.1"
+  },
+  "devDependencies": {
+    "supertest": "^3.2.0"
+  }
 }
