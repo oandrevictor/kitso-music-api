@@ -17,12 +17,12 @@
  *      consumes:
  *        - text/html
  *      parameters:
- *        - name: username
+ *        - name: title
  *          description: Your username
  *          paramType: query
  *          required: true
  *          dataType: string
- *        - name: password
+ *        - name: length
  *          description: Your password
  *          paramType: query
  *          required: true

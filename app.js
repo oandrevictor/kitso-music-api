@@ -9,6 +9,17 @@ var path = require('path');
 var swagger = require('swagger-express');
 
 const app = express()
+var db = require('./config/db');
+var ENV = process.env.ENVIROMENT || 'development'
+var db_url;
+if(ENV == 'production'){
+  db_url = db.url;
+}
+else {
+  db_url = db.local_url;
+}
+mongoose.connect(db_url);
+
 
 // Settings
 app.all("/*", function(req, res, next){
@@ -18,7 +29,6 @@ app.all("/*", function(req, res, next){
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
-app.get('/', (req, res) => res.send('Hello World!'))
 
 // session
 require('./config/passport')(passport);
@@ -35,9 +45,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-var songRoutes = require('./routes/song');
+// Routes
+app.get('/', (req, res) => res.send('Hello World!'))
+var songRouter = require('./song/song.routes');
+app.use('/song', songRouter);
 
-// set the static files location /public/img will be /img for users
 app.use(express.static(path.join(__dirname, './public')));
 
 ///SWAGGER
@@ -48,7 +60,7 @@ app.use(swagger.init(app, {
   swaggerJSON: '/api-docs.json',
   swaggerUI: './public/swagger/',
   basePath: 'http://localhost:3000',
-  apis: ['./routes/song.js', 'app.js'],
+  apis: ['./song/song.routes.js', 'app.js'],
   middleware: function(req, res){}
 }));
 
