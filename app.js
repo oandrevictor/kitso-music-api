@@ -6,7 +6,6 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var dotenv = require('dotenv').load();
 var path = require('path');
-var swagger = require('swagger-express');
 
 const app = express()
 var db = require('./config/db');
@@ -51,18 +50,6 @@ var songRouter = require('./song/song.routes');
 app.use('/song', songRouter);
 
 app.use(express.static(path.join(__dirname, './public')));
-
-///SWAGGER
-app.use(swagger.init(app, {
-  apiVersion: '1.0',
-  swaggerVersion: '1.0',
-  swaggerURL: '/swagger',
-  swaggerJSON: '/api-docs.json',
-  swaggerUI: './public/swagger/',
-  basePath: 'http://localhost:3000',
-  apis: ['./song/song.routes.js', 'app.js'],
-  middleware: function(req, res){}
-}));
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 exports = module.exports = app;
