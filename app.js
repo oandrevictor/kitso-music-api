@@ -9,7 +9,7 @@ var path = require('path');
 
 const app = express()
 var db = require('./config/db');
-var app_port = process.env.ENVIROMENT || 3000
+var app_port = process.env.PORT || 3000
 var ENV = process.env.ENVIROMENT || 'development'
 
 var db_url;
@@ -42,7 +42,14 @@ app.use(passport.session());
 // Routes
 app.get('/', (req, res) => res.send('Hello World!'))
 var songRouter = require('./api/song/router');
+var userRouter = require('./api/user/router');
+var userAuthRouter = require('./api/user/auth/router');
+
+
 app.use('/song', songRouter);
+app.use('/user/auth', userAuthRouter);
+app.use('/user', userRouter);
+
 app.use(express.static(path.join(__dirname, './public')));
 
 app.listen(app_port, () => console.log("Kitso Music is ready and set on port " + app_port +"!"))
