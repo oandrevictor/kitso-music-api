@@ -9,16 +9,12 @@ var path = require('path');
 
 const app = express()
 var db = require('./config/db');
+var app_port = process.env.ENVIROMENT || 3000
 var ENV = process.env.ENVIROMENT || 'development'
-var db_url;
-if(ENV == 'production'){
-  db_url = db.url;
-}
-else {
-  db_url = db.local_url;
-}
-mongoose.connect(db_url);
 
+var db_url;
+(ENV == 'production')? db_url = db.url : db_url = db.local_url;
+mongoose.connect(db_url);
 
 // Settings
 app.all("/*", function(req, res, next){
@@ -27,7 +23,6 @@ app.all("/*", function(req, res, next){
 })
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
-
 
 // session
 require('./config/passport')(passport);
@@ -46,10 +41,9 @@ app.use(passport.session());
 
 // Routes
 app.get('/', (req, res) => res.send('Hello World!'))
-var songRouter = require('./song/song.routes');
+var songRouter = require('./api/song/router');
 app.use('/song', songRouter);
-
 app.use(express.static(path.join(__dirname, './public')));
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(app_port, () => console.log("Kitso Music is ready and set on port " + app_port +"!"))
 exports = module.exports = app;
