@@ -23,7 +23,7 @@ var PerformerSchema = new Schema({
     }
   ],
 
-  title : {
+  name : {
     type: String
   }
 
