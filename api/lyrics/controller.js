@@ -10,7 +10,7 @@ exports.index = async function(req, res) {
     res.status(RequestStatus.BAD_REQUEST).json(err);
   }
 };
-0
+
 exports.show = function(req, res) {
   Lyrics.findById(req.params.lyrics_id)
   .catch((err) => {
