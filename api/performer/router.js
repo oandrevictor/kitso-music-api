@@ -1,7 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
-var prformerController = require('./controller');
+var performerController = require('./controller');
+
+var ensureAuthenticated = function(req, res, next){
+  if (!req.isAuthenticated())
+    res.sendStatus(401);
+  else
+    next();
+};
+
 
 /**
  * @apiDefine SongParams

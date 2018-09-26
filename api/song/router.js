@@ -3,6 +3,13 @@ var router = express.Router();
 
 var songController = require('./controller');
 
+var ensureAuthenticated = function(req, res, next){
+  if (!req.isAuthenticated())
+    res.sendStatus(401);
+  else
+    next();
+};
+
 /**
  * @apiDefine SongParams
  * @apiParam {String} spotify_id The spotify id of the song.
@@ -47,7 +54,7 @@ router.get('/:song_id', songController.show);
  * @apiUse SongParams
  *
  */
-router.post('/', songController.create);
+router.post('/', ensureAuthenticated, songController.create);
 
 /**
  * @api {put} /song Update the information for a song, given its id.
@@ -58,7 +65,7 @@ router.post('/', songController.create);
  * @apiUse SongParams
  *
  */
-router.put('/:song_id', songController.update);
+router.put('/:song_id', ensureAuthenticated, songController.update);
 
 /**
  * @api {delete} /song Delete a song given the id.
@@ -68,6 +75,6 @@ router.put('/:song_id', songController.update);
  * @apiParam {String} song_id The id of the song.
  *
  */
-router.delete('/:song_id', songController.delete);
+router.delete('/:song_id', ensureAuthenticated, songController.delete);
 
 module.exports = router;

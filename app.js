@@ -40,15 +40,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.get('/', (req, res) => res.send('Hello World!'))
+var authRouter = require('./api/auth/router');
 var songRouter = require('./api/song/router');
 var userRouter = require('./api/user/router');
-var userAuthRouter = require('./api/user/auth/router');
 
-
+app.use('/auth', authRouter);
 app.use('/song', songRouter);
-app.use('/user/auth', userAuthRouter);
 app.use('/user', userRouter);
+
+app.get('/', (req, res) => res.send('Hello World!'))
 
 app.use(express.static(path.join(__dirname, './public')));
 

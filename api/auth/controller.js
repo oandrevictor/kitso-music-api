@@ -1,7 +1,7 @@
 var bcrypt = require('bcryptjs');
 var passport = require('passport');
 var _        = require('underscore');
-var RequestStatus = require('../../utils/request_status');
+var RequestStatus = require('../utils/request_status');
 
 exports.login = function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {

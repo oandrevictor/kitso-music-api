@@ -17,7 +17,7 @@ exports.show = function(req, res) {
     res.status(RequestStatus.BAD_REQUEST).send(err);
   })
   .then(async function(performer) {
-    res.status(RequestStatus.OK).json(Perfor);
+    res.status(RequestStatus.OK).json(performer);
   });
 };
 
