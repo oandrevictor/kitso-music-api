@@ -1,30 +1,30 @@
-var Song = require('./model');
+var Performer = require('./model');
 var RequestStatus = require('../utils/request_status');
 
 exports.index = async function(req, res) {
   let performer_id = req.query.performer_id;
   try {
-    var songs = await Song.find({ _performers: { $all : [performer_id] }}).exec();
-    res.status(RequestStatus.OK).json(songs);
+    var performers = await Performer.find({}).exec();
+    res.status(RequestStatus.OK).json(performers);
   } catch (err) {
     res.status(RequestStatus.BAD_REQUEST).json(err);
   }
 };
 
 exports.show = function(req, res) {
-  Song.findById(req.params.song_id)
+  Performer.findById(req.params.performer_id)
   .catch((err) => {
     res.status(RequestStatus.BAD_REQUEST).send(err);
   })
-  .then(async function(song) {
-    res.status(RequestStatus.OK).json(song);
+  .then(async function(performer) {
+    res.status(RequestStatus.OK).json(performer);
   });
 };
 
 exports.update = function(req, res) {
-  Song.updateOne({_id: req.params.book}, {$set: req.body})
-  .then((updatedSong)=>{
-    res.status(RequestStatus.OK).json(updatedSong);
+  Performer.updateOne({_id: req.params.book}, {$set: req.body})
+  .then((updatedPerformer)=>{
+    res.status(RequestStatus.OK).json(updatedPerformer);
   })
   .catch((err) => {
     res.status(RequestStatus.BAD_REQUEST).send(err);
@@ -33,20 +33,20 @@ exports.update = function(req, res) {
 
 exports.delete = function(req, res) {
   try {
-    Song.remove({ _id: req.params.song_id}).exec();
-    res.status(RequestStatus.OK).send('Song deleted.');
+    Performer.remove({ _id: req.params.performer_id}).exec();
+    res.status(RequestStatus.OK).send('Performer deleted.');
   } catch (err) {
     res.status(RequestStatus.BAD_REQUEST).send(err);
   }
 };
 
 exports.create = function(req, res) {
-  var song = new Song(req.body);
-  song.save()
+  var performer = new Performer(req.body);
+  Performer.save()
   .catch((err) => {
     res.status(RequestStatus.BAD_REQUEST).send(err);
   })
-  .then((createdsong) => {
-    res.status(RequestStatus.OK).send(createdsong);
+  .then((createdPerformer) => {
+    res.status(RequestStatus.OK).send(createdPerformer);
   });
 };

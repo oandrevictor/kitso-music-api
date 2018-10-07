@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var songController = require('./controller');
+var performerController = require('./controller');
 
 var ensureAuthenticated = function(req, res, next){
   if (!req.isAuthenticated())
@@ -10,14 +10,14 @@ var ensureAuthenticated = function(req, res, next){
     next();
 };
 
+
 /**
  * @apiDefine SongParams
- * @apiParam {String} spotify_id The spotify id of the song.
- * @apiParam {String} title Title of the song.
- * @apiParam {Array} _composers An array with the id of the song's composers.
- * @apiParam {Array} _performers An array with the id of the song's performers.
+ * @apiParam {String} spotify_id The spotify id of the performer.
+ * @apiParam {Array} _people An array with the id of the people that are part of the associated entity, unless it's a band it will be a single entry array.
+ * @apiParam {Array} _albuns An array with the id of the performer's albuns.
  * @apiParam {Array} _albuns An array with the id of the albuns in which the song is contained.
- * @apiParam {String} _lyrics An id for the song's lyrics.
+ * @apiParam {String} name Name of the performer, used in case it's a band or the person uses an alias.
  * @apiParam {Array} _videos An array with the id of the song's composers.
  * @apiParam {Number} duration_ms The duration of the song in milliseconds.
  *
@@ -54,7 +54,7 @@ router.get('/:song_id', songController.show);
  * @apiUse SongParams
  *
  */
-router.post('/', ensureAuthenticated, songController.create);
+router.post('/', songController.create);
 
 /**
  * @api {put} /song Update the information for a song, given its id.
@@ -65,7 +65,7 @@ router.post('/', ensureAuthenticated, songController.create);
  * @apiUse SongParams
  *
  */
-router.put('/:song_id', ensureAuthenticated, songController.update);
+router.put('/:song_id', songController.update);
 
 /**
  * @api {delete} /song Delete a song given the id.
@@ -75,6 +75,6 @@ router.put('/:song_id', ensureAuthenticated, songController.update);
  * @apiParam {String} song_id The id of the song.
  *
  */
-router.delete('/:song_id', ensureAuthenticated, songController.delete);
+router.delete('/:song_id', songController.delete);
 
 module.exports = router;

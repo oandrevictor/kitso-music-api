@@ -1,30 +1,30 @@
-var Action = require('./model');
+var Album = require('./model');
 var RequestStatus = require('../utils/request_status');
 
 exports.index = async function(req, res) {
-  let action_id = req.query.action_id;
+  let album_id = req.query.album_id;
   try {
-    var actions = await Action.find({}).exec();
-    res.status(RequestStatus.OK).json(actions);
+    var albums = await Album.find({}).exec();
+    res.status(RequestStatus.OK).json(albums);
   } catch (err) {
     res.status(RequestStatus.BAD_REQUEST).json(err);
   }
 };
 
 exports.show = function(req, res) {
-  Action.findById(req.params.action_id)
+  Album.findById(req.params.album_id)
   .catch((err) => {
     res.status(RequestStatus.BAD_REQUEST).send(err);
   })
-  .then(async function(action) {
-    res.status(RequestStatus.OK).json(action);
+  .then(async function(album) {
+    res.status(RequestStatus.OK).json(album);
   });
 };
 
 exports.update = function(req, res) {
-  Action.updateOne({_id: req.params.book}, {$set: req.body})
-  .then((updatedAction)=>{
-    res.status(RequestStatus.OK).json(updatedAction);
+  Album.updateOne({_id: req.params.book}, {$set: req.body})
+  .then((updatedAlbum)=>{
+    res.status(RequestStatus.OK).json(updatedAlbum);
   })
   .catch((err) => {
     res.status(RequestStatus.BAD_REQUEST).send(err);
@@ -33,20 +33,20 @@ exports.update = function(req, res) {
 
 exports.delete = function(req, res) {
   try {
-    Action.remove({ _id: req.params.action_id}).exec();
-    res.status(RequestStatus.OK).send('Action deleted.');
+    Album.remove({ _id: req.params.album_id}).exec();
+    res.status(RequestStatus.OK).send('Album deleted.');
   } catch (err) {
     res.status(RequestStatus.BAD_REQUEST).send(err);
   }
 };
 
 exports.create = function(req, res) {
-  var action = new Action(req.body);
-  Action.save()
+  var album = new Album(req.body);
+  Album.save()
   .catch((err) => {
     res.status(RequestStatus.BAD_REQUEST).send(err);
   })
-  .then((createdAction) => {
-    res.status(RequestStatus.OK).send(createdAction);
+  .then((createdAlbum) => {
+    res.status(RequestStatus.OK).send(createdAlbum);
   });
 };
