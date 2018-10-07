@@ -47,7 +47,7 @@ var userAuthRouter = require('./api/user/auth/router');
 
 
 app.use('/song', songRouter);
-app.use('/user/auth', userAuthRouter);
+app.use('/auth', userAuthRouter);
 app.use('/user', userRouter);
 
 app.use(express.static(path.join(__dirname, './public')));

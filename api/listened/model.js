@@ -26,6 +26,6 @@ var ListenedSchema = new Schema({
 
 });
 
-var Performer = mongoose.model('Performer', ArtistSchema);
+var Listened = mongoose.model('Listened', ListenedSchema);
 
-module.exports = Artist;
+module.exports = Listened;
