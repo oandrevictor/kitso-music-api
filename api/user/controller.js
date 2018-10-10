@@ -2,7 +2,10 @@ var bcrypt = require('bcryptjs');
 var _ = require('underscore');
 var mongoose       = require('mongoose');
 
+var Playlist = require('../playlist/model');
+var Listened = require('../listened/model');
 var User = require('./model');
+
 var RequestStatus = require('../utils/request_status');
 
 exports.index = function (req, res) {
@@ -36,19 +39,6 @@ exports.show = function (req, res) {
   }
 };
 
-exports.findby = function (req, res) {
-  if (req.query.username) {
-    User.findOne({ username: req.query.username })
-    .catch((err) => {
-      res.status(RequestStatus.BAD_REQUEST).send(err);
-    })
-    .then((result) => {
-      res.status(RequestStatus.OK).json(result);
-    });
-  }
-
-};
-
 exports.findByEmail = function (req, res) {
   User.findOne({email: req.body.email})
   .catch((err) => {
@@ -69,8 +59,8 @@ exports.create = function (req, res) {
     } else {
       user.password = hash;
       user.save(async function (err) {
-        if (err) return res.status(RequestStatus.FORBIDDEN).send(err);
-        res.status(RequestStatus.OK).send('User created.');
+        if (err) return res.status(400).send(err);
+        res.status(RequestStatus.OK).send(user);
       });
     }
   });
@@ -136,17 +126,14 @@ exports.delete = function (req, res) {
     res.status(RequestStatus.BAD_REQUEST).send(err);
   })
   .then(async (user) => {
-    if (req.user && req.user._id.toString() == user._id.toString() && user.validPassword(req.body.password)) {
       let listened_list = await Listened.find({_user: user._id}).exec();
       let playlist_list = await Playlist.find({_user: user._id}).exec();
       let promises = [];
       listened_list.map((listened) => {
         promises.push(Listened.remove(listened).exec());
-        promises.push(Action.remove({_id: listened._action}).exec());
       });
       playlist_list.map((playlist) => {
         promises.push(Playlist.remove(playlist).exec());
-        promises.push(Action.remove({_id: playlist._action}).exec());
       });
       await Promise.all(promises).then((result) => {
         User.remove({ _id: req.params.user_id })
@@ -155,11 +142,8 @@ exports.delete = function (req, res) {
         })
         .then(() => {
           req.logout();
-          res.status(RequestStatus.OK).send('User successfully removed.');
+          res.status(RequestStatus.OK).json({message: 'User successfully removed.'});
         });
       });
-    } else {
-      return res.status(RequestStatus.UNAUTHORIZED).json({ status: 401, message: 'UNAUTHORIZED' });
-    }
   });
 };

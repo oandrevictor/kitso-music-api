@@ -12,11 +12,11 @@ var ensureAuthenticated = function(req, res, next){
 
 
 /**
- * @apiDefine SongParams
+ * @apiDefine PerformerParams
  * @apiParam {String} spotify_id The spotify id of the performer.
  * @apiParam {Array} _people An array with the id of the people that are part of the associated entity, unless it's a band it will be a single entry array.
- * @apiParam {Array} _albuns An array with the id of the performer's albuns.
- * @apiParam {Array} _albuns An array with the id of the albuns in which the song is contained.
+ * @apiParam {Array} _albuns An array with the ids of the performer's albuns.
+ * @apiParam {Array} _albuns An array with the ids of the albuns in which the song is contained.
  * @apiParam {String} name Name of the performer, used in case it's a band or the person uses an alias.
  * @apiParam {Array} _videos An array with the id of the song's composers.
  * @apiParam {Number} duration_ms The duration of the song in milliseconds.
@@ -27,54 +27,54 @@ var ensureAuthenticated = function(req, res, next){
 
 
 /**
- * @api {get} /song Get Information from multiple songs given some criteria
- * @apiName GetSongs
- * @apiGroup Song
+ * @api {get} /performer Get Information from multiple performers given some criteria
+ * @apiName GetPerformer
+ * @apiGroup Performer
  *
- * @apiUse SongParams
+ * @apiUse PerformerParams
  *
  */
-router.get('/', songController.index);
+router.get('/', performerController.index);
 
 /**
- * @api {get} /song Get Information from a songs given the id.
- * @apiName GetSong
- * @apiGroup Song
+ * @api {get} /performer Get Information from a performers given the id.
+ * @apiName GetPerformer
+ * @apiGroup Performer
  *
- * @apiParam {String} song_id The id of the song.
+ * @apiParam {String} performer_id The id of the performer.
  *
  */
-router.get('/:song_id', songController.show);
+router.get('/:performer_id', performerController.show);
 
 /**
- * @api {post} /song Create a song
- * @apiName PostSong
- * @apiGroup Song
+ * @api {post} /performer Create a performer
+ * @apiName PostPerformer
+ * @apiGroup Performer
  *
- * @apiUse SongParams
+ * @apiUse PerformerParams
  *
  */
-router.post('/', songController.create);
+router.post('/', performerController.create);
 
 /**
- * @api {put} /song Update the information for a song, given its id.
- * @apiName PutSong
- * @apiGroup Song
+ * @api {put} /performer Update the information for a performer, given its id.
+ * @apiName PutPerformer
+ * @apiGroup Performer
  *
- * @apiParam {String} song_id The id of the song.
- * @apiUse SongParams
+ * @apiParam {String} performer_id The id of the performer.
+ * @apiUse PerformerParams
  *
  */
-router.put('/:song_id', songController.update);
+router.put('/:performer_id', performerController.update);
 
 /**
- * @api {delete} /song Delete a song given the id.
- * @apiName DeleteSong
- * @apiGroup Song
+ * @api {delete} /performer Delete a performer given the id.
+ * @apiName DeletePerformer
+ * @apiGroup Performer
  *
- * @apiParam {String} song_id The id of the song.
+ * @apiParam {String} performer_id The id of the performer.
  *
  */
-router.delete('/:song_id', songController.delete);
+router.delete('/:performer_id', performerController.delete);
 
 module.exports = router;

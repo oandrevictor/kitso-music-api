@@ -37,7 +37,7 @@ var ensureAuthenticated = function(req, res, next){
 router.get('/', songController.index);
 
 /**
- * @api {get} /song Get Information from a songs given the id.
+ * @api {get} /song Get Information from a song given the id
  * @apiName GetSong
  * @apiGroup Song
  *
@@ -54,10 +54,10 @@ router.get('/:song_id', songController.show);
  * @apiUse SongParams
  *
  */
-router.post('/', ensureAuthenticated, songController.create);
+router.post('/', songController.create);
 
 /**
- * @api {put} /song Update the information for a song, given its id.
+ * @api {put} /song Update the information for a song, given its id
  * @apiName PutSong
  * @apiGroup Song
  *
@@ -68,13 +68,13 @@ router.post('/', ensureAuthenticated, songController.create);
 router.put('/:song_id', ensureAuthenticated, songController.update);
 
 /**
- * @api {delete} /song Delete a song given the id.
+ * @api {delete} /song Delete a song given the id
  * @apiName DeleteSong
  * @apiGroup Song
  *
  * @apiParam {String} song_id The id of the song.
  *
  */
-router.delete('/:song_id', ensureAuthenticated, songController.delete);
+router.delete('/:song_id', songController.delete);
 
 module.exports = router;

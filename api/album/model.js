@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var AlbumSchema = new Schema({
 
-  _spotify_id: {
+  spotify_id: {
     type: String,
     required: true
   },

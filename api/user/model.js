@@ -31,11 +31,12 @@ var UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: true
+    required: true,
+    select: false
   },
   birthday: {
     type: Date,
-    required: true
+    required: false
   },
   gender : {
     type: String,

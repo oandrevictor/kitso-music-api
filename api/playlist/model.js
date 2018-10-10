@@ -4,8 +4,14 @@ var Schema = mongoose.Schema;
 
 var PerformerSchema = new Schema({
 
-  _spotify_id: {
+  spotify_id: {
     type: String
+  },
+
+  title: {
+    type: String,
+    required: true,
+    default: 'Playlist'
   },
 
   _user:

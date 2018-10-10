@@ -42,7 +42,7 @@ exports.delete = function(req, res) {
 
 exports.create = function(req, res) {
   var album = new Album(req.body);
-  Album.save()
+  album.save()
   .catch((err) => {
     res.status(RequestStatus.BAD_REQUEST).send(err);
   })

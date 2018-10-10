@@ -16,7 +16,7 @@ exports.login = function(req, res, next) {
 
 exports.logout = function(req, res) {
   req.logout();
-  res.status(RequestStatus.OK).send('Logged out!')
+  res.status(RequestStatus.OK).send({status:'Logged out!'})
 }
 
 exports.status = function(req, res) {
