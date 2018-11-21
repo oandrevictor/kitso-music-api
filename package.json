@@ -4,7 +4,8 @@
   "description": "The REST API for the Kitso Music Web App",
   "main": "index.js",
   "scripts": {
-    "test": "mocha 'tests/'"
+    "test": "mocha 'tests/'",
+    "start": "node ./app.js"
   },
   "repository": {
     "type": "git",
