@@ -28,7 +28,7 @@ app.use(cors({
     }
     return callback(null, true);
   }
-}))
+}));
 
 // Settings
 app.use(bodyParser.json({limit: '50mb'}));
