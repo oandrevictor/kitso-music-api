@@ -52,6 +52,8 @@ exports.findByEmail = function (req, res) {
 
 exports.create = function (req, res) {
   var user = new User(req.body);
+  console.log(req.body.password);
+  console.log(req.body);
 
   bcrypt.hash(req.body.password, 10, async function (err, hash) {
     if (err) {
