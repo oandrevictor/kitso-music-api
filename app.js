@@ -6,6 +6,7 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var dotenv = require('dotenv').load();
 var path = require('path');
+var cors = require("cors");
 
 const app = express()
 var db = require('./config/db');
