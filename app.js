@@ -17,19 +17,7 @@ var db_url;
 mongoose.connect(db_url);
 
 var allowedOrigins = ['http://localhost:3000'];
-
-app.use(cors({
-  origin: function(origin, callback){
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){
-      var msg = 'The CORS policy for this site does not ' +
-                'allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  }
-}));
-
+'
 // Settings
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
@@ -50,6 +38,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
+app.use(cors());
+
 var authRouter = require('./api/auth/router');
 var albumRouter = require('./api/album/router');
 var songRouter = require('./api/song/router');
