@@ -17,7 +17,7 @@ var db_url;
 mongoose.connect(db_url);
 
 var allowedOrigins = ['http://localhost:3000'];
-'
+
 // Settings
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
