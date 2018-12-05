@@ -55,10 +55,12 @@ exports.create = function (req, res) {
 
   bcrypt.hash(req.body.password, 10, async function (err, hash) {
     if (err) {
+      console.log(err);
       res.status(RequestStatus.BAD_REQUEST).send(err);
     } else {
       user.password = hash;
       user.save(async function (err) {
+        console.log(err);
         if (err) return res.status(400).send(err);
         res.status(RequestStatus.OK).send(user);
       });
