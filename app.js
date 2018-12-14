@@ -24,6 +24,17 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 // session
+
+
+// Routes
+app.use(cors());
+
+var authRouter = require('./api/auth/router');
+var albumRouter = require('./api/album/router');
+var songRouter = require('./api/song/router');
+var userRouter = require('./api/user/router');
+var userAuthRouter = require('./api/auth/router');
+
 require('./config/passport')(passport);
 app.use(session({
   store: new MongoStore({
@@ -37,16 +48,6 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Routes
-app.use(cors());
-
-var authRouter = require('./api/auth/router');
-var albumRouter = require('./api/album/router');
-var songRouter = require('./api/song/router');
-var userRouter = require('./api/user/router');
-var userAuthRouter = require('./api/auth/router');
-
 app.use('/auth', authRouter);
 app.use('/song', songRouter);
 app.use('/album', albumRouter);
