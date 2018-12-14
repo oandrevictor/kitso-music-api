@@ -54,8 +54,8 @@ var UserSchema = new Schema({
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
   };
 
-  UserSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.password);
+  UserSchema.methods.validPassword = function(password, userPassword) {
+    return bcrypt.compareSync(password, userPassword);
   };
 
   var User = mongoose.model('User', UserSchema);
