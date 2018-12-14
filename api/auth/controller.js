@@ -10,7 +10,7 @@ exports.login = function(req, res, next) {
     req.logIn(user, function(err) {
       console.log(req.sessionID)
       if (err) return res.status(RequestStatus.INTERNAL_SERVER_ERROR).json({ err: 'Could not log in user' });
-      res.status(RequestStatus.OK).json({ status: 'Login successful!' });
+      res.status(RequestStatus.OK).json({ status: 'Login successful!', session: req.sessionID });
     });
   })(req, res, next);
 }
