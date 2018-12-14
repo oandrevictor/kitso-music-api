@@ -27,7 +27,10 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 
 // Routes
-app.use(cors());
+app.use(cors({
+  methods:['GET','POST'],
+  credentials: true
+}));
 
 var authRouter = require('./api/auth/router');
 var albumRouter = require('./api/album/router');
