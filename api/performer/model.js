@@ -28,6 +28,10 @@ var PerformerSchema = new Schema({
 
   fallback_image: {
     type: String
+  },
+
+  _bio: {
+    type: String
   }
 
 });
