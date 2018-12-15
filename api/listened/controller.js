@@ -42,7 +42,7 @@ exports.delete = function(req, res) {
 
 exports.create = function(req, res) {
   var listened = new Listened(req.body);
-  Listened.save()
+  listened.save()
   .catch((err) => {
     res.status(RequestStatus.BAD_REQUEST).send(err);
   })

@@ -42,7 +42,7 @@ exports.delete = function(req, res) {
 
 exports.create = function(req, res) {
   var lyrics = new Lyrics(req.body);
-  Lyrics.save()
+  lyrics.save()
   .catch((err) => {
     res.status(RequestStatus.BAD_REQUEST).send(err);
   })
