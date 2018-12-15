@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
-var PerformerSchema = new Schema({
+var PlaylistSchema = new Schema({
 
   spotify_id: {
     type: String
@@ -36,6 +36,6 @@ var PerformerSchema = new Schema({
 
 });
 
-var Performer = mongoose.model('Performer', PerformerSchema);
+var Playlist = mongoose.model('Performer', PlaylistSchema);
 
-module.exports = Performer;
+module.exports = Playlist;
