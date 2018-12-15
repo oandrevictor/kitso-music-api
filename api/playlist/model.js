@@ -36,6 +36,6 @@ var PlaylistSchema = new Schema({
 
 });
 
-var Playlist = mongoose.model('Performer', PlaylistSchema);
+var Playlist = mongoose.model('Playlist', PlaylistSchema);
 
 module.exports = Playlist;
