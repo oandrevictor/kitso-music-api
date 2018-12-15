@@ -30,7 +30,7 @@ var PerformerSchema = new Schema({
     type: String
   },
 
-  _bio: {
+  bio: {
     type: String
   }
 
