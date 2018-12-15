@@ -38,6 +38,7 @@ var albumRouter = require('./api/album/router');
 var songRouter = require('./api/song/router');
 var userRouter = require('./api/user/router');
 var userAuthRouter = require('./api/auth/router');
+var performerRouter = require('./api/performer/router');
 
 require('./config/passport')(passport);
 app.use(session({
@@ -57,6 +58,7 @@ app.use('/song', songRouter);
 app.use('/album', albumRouter);
 app.use('/auth', userAuthRouter);
 app.use('/user', userRouter);
+app.use('/performer', performerRouter);
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
