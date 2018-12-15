@@ -9,6 +9,13 @@ var PerformerSchema = new Schema({
     required: true
   },
 
+  _people: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Person'
+    }
+  ],
+
   _albuns: [
     {
       type: mongoose.Schema.Types.ObjectId,
