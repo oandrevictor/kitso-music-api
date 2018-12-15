@@ -24,6 +24,10 @@ var PerformerSchema = new Schema({
     type: String,
     required: true,
     enum: ['person', 'group']
+  },
+
+  fallback_image: {
+    type: String
   }
 
 });
