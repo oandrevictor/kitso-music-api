@@ -18,7 +18,7 @@ var PerformerSchema = new Schema({
 
   name : {
     type: String
-  }
+  },
 
   _type: {
     type: String,
