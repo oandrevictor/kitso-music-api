@@ -29,6 +29,14 @@ var AlbumSchema = new Schema({
   _artist: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Performer'
+  },
+
+  image: {
+    type: String
+  },
+
+  description: {
+    type: String
   }
 
 });
