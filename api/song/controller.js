@@ -4,7 +4,11 @@ var RequestStatus = require('../utils/request_status');
 exports.index = async function(req, res) {
   let performer_id = req.query.performer_id;
   try {
-    var songs = await Song.find({ _performers: { $all : [performer_id] }}).exec();
+    if (performer_id){
+      var songs = await Song.find({ _performers: { $all : [performer_id] }}).exec();
+    }else {
+      var songs = await Song.find({}).exec();
+    }
     res.status(RequestStatus.OK).json(songs);
   } catch (err) {
     res.status(RequestStatus.BAD_REQUEST).json(err);
