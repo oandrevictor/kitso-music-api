@@ -16,7 +16,7 @@ exports.index = async function(req, res) {
 };
 
 exports.show = function(req, res) {
-  Song.findById(req.params.song_id).populate('_albuns', '_performers')
+  Song.findById(req.params.song_id).populate('_albuns').populate('_performers')
   .catch((err) => {
     res.status(RequestStatus.BAD_REQUEST).send(err);
   })
