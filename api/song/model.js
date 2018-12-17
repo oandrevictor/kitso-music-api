@@ -51,7 +51,7 @@ var SongSchema = new Schema({
   duration_ms: {
     type: Number,
     required: true,
-    default: 99999
+    default: 0
   },
 
   release_date: {
@@ -60,6 +60,10 @@ var SongSchema = new Schema({
 
   is_explicit: {
     type: Boolean
+  },
+
+  image: {
+    type: String
   }
 
 });
