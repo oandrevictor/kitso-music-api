@@ -2,7 +2,6 @@ var Listened = require('./model');
 var RequestStatus = require('../utils/request_status');
 
 exports.index = async function(req, res) {
-  let listened_id = req.query.listened_id;
   try {
     var listeneds = await Listened.find({}).exec();
     res.status(RequestStatus.OK).json(listeneds);
@@ -22,7 +21,7 @@ exports.show = function(req, res) {
 };
 
 exports.update = function(req, res) {
-  Listened.updateOne({_id: req.params.book}, {$set: req.body})
+  Listened.updateOne({_id: req.params.listened_id}, {$set: req.body})
   .then((updatedListened)=>{
     res.status(RequestStatus.OK).json(updatedListened);
   })
